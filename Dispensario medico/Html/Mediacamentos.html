@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Medicamentos</title>
+  <link rel="stylesheet" href="../css/estilosM.css">
+</head>
+<body>
+
+  <h1>Gestión de Medicamentos</h1>
+
+  <form id="formulario">
+    <label for="nombre">Nombre del medicamento:</label>
+    <input type="text" id="nombre" required>
+
+    <label for="tipo">Tipo:</label>
+    <select id="tipo">
+      <option value="Pastilla">Pastilla</option>
+      <option value="Cápsula">Cápsula</option>
+      <option value="Jarabe">Jarabe</option>
+      <option value="Inyeccion">Inyección</option>
+    </select>
+
+    <label for="marca">Marca:</label>
+    <input type="text" id="marca" required>
+
+  <label for="estado">Estado:</label> 
+    <select id="estado">
+      <option value="Activo">Activo</option>
+      <option value="Vencido">Vencido</option>
+    </select>
+
+    <button type="submit">Registrar</button>
+  </form>
+
+  <table id="tabla">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Cedula</th>
+        <th>Carnet</th>
+        <th>Tipo</th>
+        <th>Marca</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Medicamentos registrados aparecerán aquí -->
+    </tbody>
+  </table>
+
+  <script src="../js/appM.js"></script>
+</body>
+</html>

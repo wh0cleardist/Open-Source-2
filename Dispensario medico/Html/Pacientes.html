@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Pacientes</title>
+  <link rel="stylesheet" href="../css/estilosP.css">
+</head>
+<body>
+
+  <h1>Consultor De Pacientes</h1>
+
+  <form id="formulario">
+    <label for="nombre">Nombre del Paciente:</label>
+    <input type="text" id="nombre" required>
+
+     <form id="formulario">
+    <label for="cedula">Numero de cedula:</label>
+    <input type="text" id="Cedula" required>
+
+
+    <form id="formulario">
+    <label for="indentificador">indentificador:</label>
+    <input type="text" id="indentificador" required>
+
+     <label for="Tipo">Tipo De Paciente</label> 
+    <select id="Tipo">
+      <option value="estudiante">Estudiante</option>
+      <option value="profesor">Profesor</option>
+      <option value="empleado">Empleado</option>
+      <option value="otro">Otro</option>
+    </select>
+
+    <label for="Estado">Estado</label> 
+    <select id="Estado">
+      <option value="Activo">Activo</option>
+      <option value="Inactivo">Inactivo</option>
+      <option value="Defuncion">Defuncion</option>
+    </select>
+
+    <label for="Doctor">Doctor</label>
+    <input type="text" id="Doctor" required>
+
+    <button type="submit">Registrar</button>
+  </form>
+
+  <table id="tabla">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Cedula</th>
+        <th>indentificador</th>
+        <th>Tipo De Paciente</th>
+        <th>Estado</th>
+        <th>Doctor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Medicamentos registrados aparecerán aquí -->
+    </tbody>
+  </table>
+
+  <script src="../js/appP.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Medicamentos</title>
+  <link rel="stylesheet" href="../css/estilosE.css">
+</head>
+<body>
+
+  <h1>Gestión de Medicos</h1>
+
+  <form id="formulario">
+    <label for="nombre">Nombre Del Medico:</label>
+    <input type="text" id="nombre" required>
+
+    <form id="formulario">
+    <label for="indentificador">Indentificador Del Medico:</label>
+    <input type="text" id="indentificador" required>
+
+     <form id="formulario">
+    <label for="cedula">Cedula Del Medico:</label>
+    <input type="text" id="cedula" required>
+
+    <label for="tanda_laboral">Tanda Laboral:</label>
+    <select id="tanda_laboral">
+      <option value="Diurna">Diurna</option>
+      <option value="Tarde">Tarde</option>
+      <option value="Noche">Noche</option>
+      <option value="Rotativa">Rotativa</option>
+    </select>
+
+    <label for="espcialidad">Especialidad:</label>
+    <input type="text" id="especialidad" required>
+
+  <label for="estado">Estado:</label> 
+    <select id="estado">
+      <option value="Disponible">Activo</option>
+      <option value="Ausente">Ausente</option>
+      <option value="Descanso">Descanso</option>
+    </select>
+
+    <button type="submit">Registrar</button>
+  </form>
+
+  <table id="tabla">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Indentificador</th>
+        <th>Cedula</th>
+        <th>Tanda laboral</th>
+        <th>Especialidad</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Medicamentos registrados aparecerán aquí -->
+    </tbody>
+  </table>
+
+  <script src="../js/appE.js"></script>
+</body>
+</html>
