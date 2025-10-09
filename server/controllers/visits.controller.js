@@ -2,7 +2,7 @@ import { Visit } from '../models/index.js';
 import { all } from '../db/connection.js';
 
 export const VisitsController = {
-  async create(req, res) {
+  async create(req, res) { // crear visita
     try {
       if (!req.body.visitante) throw new Error('Visitante requerido');
       const result = await Visit.create(req.body);
@@ -12,28 +12,28 @@ export const VisitsController = {
       res.status(400).json({ error: e.message });
     }
   },
-  async all(_req, res) {
+  async all(_req, res) { // listar visitas
     const rows = await Visit.findAll();
     res.json(rows);
   },
-  async one(req, res) {
+  async one(req, res) { // una visita
     const row = await Visit.findById(req.params.id);
     if (!row) return res.status(404).json({ error: 'No encontrado' });
     res.json(row);
   },
-  async update(req, res) {
+  async update(req, res) { // actualizar
     if (req.body.visitante !== undefined && !req.body.visitante) return res.status(400).json({ error: 'Visitante requerido' });
     const result = await Visit.update(req.params.id, req.body);
     if (!result.changes) return res.status(404).json({ error: 'No encontrado' });
     const row = await Visit.findById(req.params.id);
     res.json(row);
   },
-  async remove(req, res) {
+  async remove(req, res) { // borrar
     const result = await Visit.remove(req.params.id);
     if (!result.changes) return res.status(404).json({ error: 'No encontrado' });
     res.json({ ok: true });
   },
-  async report(req, res) {
+  async report(req, res) { // reporte con filtros
     const { doctorId, patientId, date, from, to } = req.query;
     const conditions = [];
     const params = [];

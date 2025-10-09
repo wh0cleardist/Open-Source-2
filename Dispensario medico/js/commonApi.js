@@ -1,4 +1,4 @@
-// Utilidad común para llamadas fetch CRUD
+// Función para pedir datos a la API
 const API_BASE = '/api';
 
 async function apiRequest(path, options = {}) {
@@ -13,5 +13,5 @@ async function apiRequest(path, options = {}) {
   return res.json();
 }
 
-// Expose globally
+// Lo uso en otras partes
 window.api = { request: apiRequest };

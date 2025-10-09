@@ -3,7 +3,7 @@ const formFiltro = document.getElementById('form-filtro');
 const tbodyVis = document.querySelector('#tabla tbody');
 let editingVisitId = null;
 
-async function cargarSelectBase(path, id) {
+async function cargarSelectBase(path, id) { // llena selects
   const data = await api.request(path);
   const sel = document.getElementById(id);
   sel.innerHTML = '<option value="">--</option>' + data.map(r => `<option value="${r.id}">${r.nombre}</option>`).join('');
@@ -13,7 +13,7 @@ async function cargarSelectBase(path, id) {
   }
 }
 
-async function cargarVisitas(params='') {
+async function cargarVisitas(params='') { // lista visitas
   const data = await api.request('/visits' + params);
   tbodyVis.innerHTML = '';
   data.forEach(v => {
@@ -33,7 +33,7 @@ async function cargarVisitas(params='') {
   });
 }
 
-formVis.addEventListener('submit', async (e) => {
+formVis.addEventListener('submit', async (e) => { // guardar visita
   e.preventDefault();
   const payload = {
     visitante: document.getElementById('visitante').value.trim(),
@@ -58,7 +58,7 @@ formVis.addEventListener('submit', async (e) => {
   } catch (err) { alert(err.message); }
 });
 
-tbodyVis.addEventListener('click', async (e) => {
+tbodyVis.addEventListener('click', async (e) => { // editar o borrar
   const id = e.target.dataset.edit || e.target.dataset.del;
   if (!id) return;
   if (e.target.dataset.edit) {
@@ -77,7 +77,7 @@ tbodyVis.addEventListener('click', async (e) => {
   }
 });
 
-formFiltro.addEventListener('submit', async (e) => {
+formFiltro.addEventListener('submit', async (e) => { // filtros reporte
   e.preventDefault();
   const doctorId = document.getElementById('f_doctor_id').value;
   const patientId = document.getElementById('f_patient_id').value;
@@ -109,7 +109,7 @@ formFiltro.addEventListener('submit', async (e) => {
   });
 });
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async () => { // inicio
   await Promise.all([
     cargarSelectBase('/doctors','doctor_id'),
     cargarSelectBase('/patients','patient_id'),

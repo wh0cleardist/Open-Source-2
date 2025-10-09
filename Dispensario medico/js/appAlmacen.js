@@ -1,10 +1,10 @@
-// Gestión de Almacén: Ubicaciones, Tipos de Fármacos y Marcas
-// --- Ubicaciones ---
+// Almacén: Ubicaciones, Tipos y Marcas
+// Ubicaciones
 const formAlmacen = document.getElementById('form-almacen');
 const tbodyAlmacen = document.querySelector('#tabla tbody');
 let editingIdAlmacen = null;
 
-async function cargarUbicaciones() {
+async function cargarUbicaciones() { // lista ubicaciones
   const data = await api.request('/locations');
   tbodyAlmacen.innerHTML = '';
   data.forEach(loc => {
@@ -23,7 +23,7 @@ async function cargarUbicaciones() {
   });
 }
 
-formAlmacen.addEventListener('submit', async (e) => {
+formAlmacen.addEventListener('submit', async (e) => { // guardar ubicacion
   e.preventDefault();
   const nombre = document.getElementById('nombre').value.trim();
   if (!nombre) return alert('Nombre requerido');
@@ -45,7 +45,7 @@ formAlmacen.addEventListener('submit', async (e) => {
   } catch (err) { alert(err.message); }
 });
 
-tbodyAlmacen.addEventListener('click', async (e) => {
+tbodyAlmacen.addEventListener('click', async (e) => { // editar o borrar ubicacion
   const id = e.target.dataset.editLoc || e.target.dataset.delLoc;
   if (!id) return;
   if (e.target.dataset.editLoc) {
@@ -63,12 +63,12 @@ tbodyAlmacen.addEventListener('click', async (e) => {
   }
 });
 
-// --- Tipos de Fármacos ---
+// Tipos
 const formTipo = document.getElementById('form-tipo');
 const tbodyTipos = document.querySelector('#tabla-tipos tbody');
 let editingTipoId = null;
 
-async function cargarTipos() {
+async function cargarTipos() { // lista tipos
   const data = await api.request('/drug-types');
   tbodyTipos.innerHTML = '';
   data.forEach(t => {
@@ -86,7 +86,7 @@ async function cargarTipos() {
   });
 }
 
-formTipo?.addEventListener('submit', async (e) => {
+formTipo?.addEventListener('submit', async (e) => { // guardar tipo
   e.preventDefault();
   const payload = {
     nombre: document.getElementById('tipo-nombre').value.trim(),
@@ -106,7 +106,7 @@ formTipo?.addEventListener('submit', async (e) => {
   } catch (err) { alert(err.message); }
 });
 
-tbodyTipos?.addEventListener('click', async (e) => {
+tbodyTipos?.addEventListener('click', async (e) => { // editar o borrar tipo
   const id = e.target.dataset.editTipo || e.target.dataset.delTipo;
   if (!id) return;
   if (e.target.dataset.editTipo) {
@@ -120,12 +120,12 @@ tbodyTipos?.addEventListener('click', async (e) => {
   }
 });
 
-// --- Marcas ---
+// Marcas
 const formMarca = document.getElementById('form-marca');
 const tbodyMarcas = document.querySelector('#tabla-marcas tbody');
 let editingMarcaId = null;
 
-async function cargarMarcas() {
+async function cargarMarcas() { // lista marcas
   const data = await api.request('/brands');
   tbodyMarcas.innerHTML = '';
   data.forEach(m => {
@@ -142,7 +142,7 @@ async function cargarMarcas() {
   });
 }
 
-formMarca?.addEventListener('submit', async (e) => {
+formMarca?.addEventListener('submit', async (e) => { // guardar marca
   e.preventDefault();
   const payload = {
     nombre: document.getElementById('marca-nombre').value.trim(),
@@ -161,7 +161,7 @@ formMarca?.addEventListener('submit', async (e) => {
   } catch (err) { alert(err.message); }
 });
 
-tbodyMarcas?.addEventListener('click', async (e) => {
+tbodyMarcas?.addEventListener('click', async (e) => { // editar o borrar marca
   const id = e.target.dataset.editMarca || e.target.dataset.delMarca;
   if (!id) return;
   if (e.target.dataset.editMarca) {
@@ -174,7 +174,7 @@ tbodyMarcas?.addEventListener('click', async (e) => {
   }
 });
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async () => { // cargar todo al inicio
   await Promise.all([
     cargarUbicaciones(),
     cargarTipos(),

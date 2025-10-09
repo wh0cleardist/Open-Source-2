@@ -1,5 +1,6 @@
 import { db } from './connection.js';
 
+// Crea todas las tablas
 export function initSchema() {
   db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS drug_types (

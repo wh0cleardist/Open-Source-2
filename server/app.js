@@ -1,3 +1,4 @@
+// Servidor principal
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
@@ -16,15 +17,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Static front-end (existing files)
+// Sirve los archivos del frontend (carpeta Dispensario medico)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, '..', 'Dispensario medico')));
 
-// Initialize DB tables if not present
+// Crea tablas si no existen
 initSchema();
 
-// API Routes (prefixed)
+// Rutas de la API
 app.use('/api/drug-types', drugTypeRoutes);
 app.use('/api/brands', brandRoutes);
 app.use('/api/locations', locationRoutes);
@@ -34,15 +35,15 @@ app.use('/api/doctors', doctorRoutes);
 app.use('/api/visits', visitRoutes);
 app.use('/api/reports', reportRoutes);
 
-// Health check
+// Ruta simple para ver si está vivo
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
 
-// Root redirect to dashboard (index.html)
+// Página principal (dashboard)
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'Dispensario medico', 'Html', 'index.html'));
 });
 
-// Not found handler
+// Si no encuentra la ruta
 app.use((req, res) => {
   res.status(404).json({ error: 'Recurso no encontrado' });
 });
