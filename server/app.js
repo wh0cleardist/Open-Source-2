@@ -51,7 +51,7 @@ app.use((req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   const urlBase = `http://localhost:${PORT}`;
-  const dashboard = `${urlBase}/Html/index.html`;
+  const dashboard = `${urlBase}/Html/login.html`;
   console.log('==========================================');
   console.log(`Servidor listo en: ${urlBase}`);
   console.log(`Dashboard:       ${dashboard}`);
