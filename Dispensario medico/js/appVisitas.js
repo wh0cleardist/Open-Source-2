@@ -27,6 +27,7 @@ async function cargarVisitas(params='') { // lista visitas
       <td>${nombre(cacheDocs, v.doctor_id)}</td>
       <td>${nombre(cachePacs, v.patient_id)}</td>
       <td>${nombre(cacheMeds, v.medicine_id)}</td>
+      <td>${v.cantidad_despachada || 1}</td>
       <td>${v.fecha||''}</td>
       <td>${v.hora||''}</td>
       <td>${v.sintomas||''}</td>
@@ -44,6 +45,7 @@ formVis.addEventListener('submit', async (e) => { // guardar visita
     doctor_id: document.getElementById('doctor_id').value || null,
     patient_id: document.getElementById('patient_id').value || null,
     medicine_id: document.getElementById('medicine_id').value || null,
+    cantidad_despachada: parseInt(document.getElementById('cantidad_despachada').value) || 1,
     fecha: document.getElementById('fecha').value,
     hora: document.getElementById('hora').value,
     sintomas: document.getElementById('sintomas').value.trim(),
@@ -65,18 +67,19 @@ formVis.addEventListener('submit', async (e) => { // guardar visita
 
 tbodyVis.addEventListener('click', async (e) => { // editar o borrar
   const id = e.target.dataset.edit || e.target.dataset.del;
-  if (!id) return;
   if (e.target.dataset.edit) {
     const v = await api.request(`/visits/${id}`);
     document.getElementById('visitante').value = v.visitante;
     document.getElementById('doctor_id').value = v.doctor_id || '';
     document.getElementById('patient_id').value = v.patient_id || '';
     document.getElementById('medicine_id').value = v.medicine_id || '';
+    document.getElementById('cantidad_despachada').value = v.cantidad_despachada || 1;
     document.getElementById('fecha').value = v.fecha || '';
     document.getElementById('hora').value = v.hora || '';
     document.getElementById('sintomas').value = v.sintomas || '';
   document.getElementById('recomendaciones').value = v.recomendaciones || '';
     document.getElementById('estado').value = v.estado;
+    editingVisitId = id;yId('estado').value = v.estado;
     editingVisitId = id;
   } else if (e.target.dataset.del) {
     if (confirm('¿Eliminar visita?')) { await api.request(`/visits/${id}`, { method: 'DELETE' }); await cargarVisitas(); }
@@ -97,7 +100,6 @@ formFiltro.addEventListener('submit', async (e) => { // filtros reporte
   if (from && to) { q.append('from', from); q.append('to', to); }
   const rows = await api.request('/reports/visits?' + q.toString());
   // Reuse table for filtered results
-  tbodyVis.innerHTML='';
   rows.forEach(v => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -106,6 +108,7 @@ formFiltro.addEventListener('submit', async (e) => { // filtros reporte
       <td>${v.doctor_nombre||v.doctor_id||''}</td>
       <td>${v.paciente_nombre||v.patient_id||''}</td>
       <td>${v.medicamento_nombre||v.medicine_id||''}</td>
+      <td>${v.cantidad_despachada || 1}</td>
       <td>${v.fecha||''}</td>
       <td>${v.hora||''}</td>
       <td>${v.sintomas||''}</td>
@@ -113,6 +116,7 @@ formFiltro.addEventListener('submit', async (e) => { // filtros reporte
       <td>${v.estado}</td>
       <td>-</td>`;
     tbodyVis.appendChild(tr);
+  });bodyVis.appendChild(tr);
   });
 });
 

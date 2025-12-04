@@ -1,12 +1,49 @@
-import { Visit } from '../models/index.js';
-import { all } from '../db/connection.js';
+import { Visit, Medicine } from '../models/index.js';
+import { all, run, get } from '../db/connection.js';
 
 export const VisitsController = {
   async create(req, res) { // crear visita
     try {
       if (!req.body.visitante) throw new Error('Visitante requerido');
       if (req.body.recomendaciones && req.body.recomendaciones.length > 255) throw new Error('Recomendaciones muy largas');
+      
+      const cantidadDespachada = req.body.cantidad_despachada || 1;
+      
+      // Si se asigna medicamento, validar y descontar stock
+      if (req.body.medicine_id) {
+        const medicine = await Medicine.findById(req.body.medicine_id);
+        if (!medicine) throw new Error('Medicamento no encontrado');
+        
+        const stockActual = medicine.cantidad_disponible || 0;
+        
+        if (stockActual < cantidadDespachada) {
+          throw new Error(`Stock insuficiente. Disponible: ${stockActual}, Solicitado: ${cantidadDespachada}`);
+        }
+        
+        // Descontar stock
+        const nuevoStock = stockActual - cantidadDespachada;
+        await Medicine.update(req.body.medicine_id, { 
+          cantidad_disponible: nuevoStock,
+          estado: nuevoStock === 0 ? 'Agotado' : medicine.estado
+        });
+        
+        // Registrar movimiento de inventario
+        await run(
+          `INSERT INTO inventory_movements (medicine_id, tipo, cantidad, visit_id, motivo) VALUES (?, ?, ?, ?, ?)`,
+          [req.body.medicine_id, 'SALIDA', cantidadDespachada, null, 'Despacho en visita']
+        );
+      }
+      
       const result = await Visit.create(req.body);
+      
+      // Actualizar el visit_id en el movimiento
+      if (req.body.medicine_id) {
+        await run(
+          `UPDATE inventory_movements SET visit_id = ? WHERE medicine_id = ? AND visit_id IS NULL ORDER BY id DESC LIMIT 1`,
+          [result.id, req.body.medicine_id]
+        );
+      }
+      
       const row = await Visit.findById(result.id);
       res.status(201).json(row);
     } catch (e) {

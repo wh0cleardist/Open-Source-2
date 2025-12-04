@@ -11,6 +11,7 @@ import patientRoutes from './routes/patients.routes.js';
 import doctorRoutes from './routes/doctors.routes.js';
 import visitRoutes from './routes/visits.routes.js';
 import reportRoutes from './routes/reports.routes.js';
+import inventoryRoutes from './routes/inventory.routes.js';
 import { initSchema } from './db/schema.js';
 
 const app = express();
@@ -34,6 +35,7 @@ app.use('/api/patients', patientRoutes);
 app.use('/api/doctors', doctorRoutes);
 app.use('/api/visits', visitRoutes);
 app.use('/api/reports', reportRoutes);
+app.use('/api/inventory', inventoryRoutes);
 
 // Ruta simple para ver si está vivo
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));

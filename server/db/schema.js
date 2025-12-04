@@ -92,5 +92,26 @@ export function initSchema() {
     addColumn('medicines', 'dosis TEXT');
     // visits: recomendaciones
     addColumn('visits', 'recomendaciones TEXT');
+    
+    // INVENTARIO: cantidad disponible en medicamentos
+    addColumn('medicines', 'cantidad_disponible INTEGER DEFAULT 0');
+    addColumn('medicines', 'stock_minimo INTEGER DEFAULT 5');
+    
+    // INVENTARIO: cantidad despachada en visitas
+    addColumn('visits', 'cantidad_despachada INTEGER DEFAULT 1');
+    
+    // Tabla de movimientos de inventario (para historial)
+    db.run(`CREATE TABLE IF NOT EXISTS inventory_movements (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      medicine_id INTEGER NOT NULL,
+      tipo TEXT NOT NULL,
+      cantidad INTEGER NOT NULL,
+      visit_id INTEGER,
+      motivo TEXT,
+      usuario TEXT DEFAULT 'sistema',
+      fecha_hora TEXT DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY(medicine_id) REFERENCES medicines(id),
+      FOREIGN KEY(visit_id) REFERENCES visits(id)
+    );`);
   });
 }
