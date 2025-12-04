@@ -3,7 +3,7 @@ async function loadNavbar() {
   const container = document.getElementById('navbar-container');
   if (!container) return;
   try {
-    const res = await fetch('navbar.html');
+    const res = await fetch('/Html/navbar.html');
     const html = await res.text();
     container.innerHTML = html;
     activateNavLogic();

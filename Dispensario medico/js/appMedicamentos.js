@@ -35,12 +35,26 @@ async function cargarMedicamentos() { // lista y pinta medicamentos
   const data = await api.request('/medicines');
   tbodyMed.innerHTML = '';
   data.forEach(m => {
+    const stock = m.cantidad_disponible || 0;
+    const stockMin = m.stock_minimo || 5;
+    let stockColor = 'green';
+    let stockIcon = '✓';
+    
+    if (stock === 0) {
+      stockColor = 'red';
+      stockIcon = '✗';
+    } else if (stock <= stockMin) {
+      stockColor = 'orange';
+      stockIcon = '⚠';
+    }
+    
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td>${m.id}</td>
       <td>${m.nombre}</td>
       <td>${m.descripcion||''}</td>
       <td>${m.dosis||''}</td>
+      <td style="color:${stockColor}; font-weight:bold;">${stockIcon} ${stock}</td>
       <td>${nombreDe(m.drug_type_id, cache.tipos)}</td>
       <td>${nombreDe(m.brand_id, cache.marcas)}</td>
       <td>${nombreDe(m.location_id, cache.ubicaciones)}</td>
@@ -56,6 +70,8 @@ formMed.addEventListener('submit', async (e) => { // guardar o actualizar
     nombre: document.getElementById('nombre').value.trim(),
     descripcion: document.getElementById('descripcion').value.trim(),
     dosis: document.getElementById('dosis').value.trim(),
+    cantidad_disponible: parseInt(document.getElementById('cantidad_disponible').value) || 0,
+    stock_minimo: parseInt(document.getElementById('stock_minimo').value) || 5,
     drug_type_id: +document.getElementById('drug_type_id').value || null,
     brand_id: +document.getElementById('brand_id').value || null,
     location_id: +document.getElementById('location_id').value || null,
@@ -75,16 +91,18 @@ formMed.addEventListener('submit', async (e) => { // guardar o actualizar
 });
 
 tbodyMed.addEventListener('click', async (e) => { // editar o borrar
-  const id = e.target.dataset.edit || e.target.dataset.del;
-  if (!id) return;
   if (e.target.dataset.edit) {
     const m = await api.request(`/medicines/${id}`);
     document.getElementById('nombre').value = m.nombre;
   document.getElementById('descripcion').value = m.descripcion || '';
   document.getElementById('dosis').value = m.dosis || '';
+    document.getElementById('cantidad_disponible').value = m.cantidad_disponible || 0;
+    document.getElementById('stock_minimo').value = m.stock_minimo || 5;
     document.getElementById('drug_type_id').value = m.drug_type_id || '';
     document.getElementById('brand_id').value = m.brand_id || '';
     document.getElementById('location_id').value = m.location_id || '';
+    document.getElementById('estado').value = m.estado || 'Activo';
+    editingMedId = id;tById('location_id').value = m.location_id || '';
     document.getElementById('estado').value = m.estado || 'Activo';
     editingMedId = id;
   } else if (e.target.dataset.del) {

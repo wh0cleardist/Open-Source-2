@@ -2,15 +2,6 @@
 
 Proyecto académico sencillo para gestionar un dispensario: catálogos, medicamentos, médicos, pacientes y visitas con reporte. Backend Express + SQLite (se crea solo). Frontend HTML + JS plano usando `fetch`.
 
-## Funcionalidades
-
-- CRUD completo: Tipos, Marcas, Ubicaciones, Medicamentos, Médicos, Pacientes, Visitas.
-- Campos agregados según requisitos: ubicación (estante, tramo, celda), medicamento (descripción, dosis), visita (recomendaciones), marca (descripcion), paciente (Matricula = identificador).
-- Reporte de visitas filtrado por: médico, paciente, fecha exacta o rango (desde/hasta).
-- Página Almacén unifica gestión de catálogos.
-- Navegación común (navbar) + dashboard.
-- Validaciones básicas en servidor (nombre requerido, longitud dosis/recomendaciones).
-
 ## Estructura (Resumida)
 
 ```
@@ -20,16 +11,6 @@ Dispensario medico/js/    -> Scripts JS
 Dispensario medico/css/   -> Estilos
 data/dispensario.db       -> Base SQLite (se crea sola)
 ```
-
-## Tablas y Campos Clave
-
-- drug_types: nombre, descripcion, estado
-- brands: nombre, descripcion, estado
-- locations: nombre, descripcion, estante, tramo, celda, estado
-- medicines: nombre, descripcion, dosis, drug_type_id, brand_id, location_id, estado
-- doctors: nombre, identificador, cedula, tanda_laboral, especialidad, estado
-- patients: nombre, cedula, identificador (Matricula), tipo, estado, doctor_id
-- visits: visitante, doctor_id, patient_id, medicine_id, fecha, hora, sintomas, recomendaciones, estado
 
 ## Cómo Ejecutar
 
