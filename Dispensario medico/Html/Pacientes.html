@@ -17,9 +17,11 @@
       <label for="nombre">Nombre *</label>
       <input type="text" id="nombre" placeholder="Ej: Ana Gómez" required>
     </div>
-    <div style="display:flex;flex-direction:column;">
+    <div style="display:flex;flex-direction:column;position:relative;">
       <label for="cedula">Cédula *</label>
-      <input type="text" id="cedula" placeholder="000-0000000-0" required>
+      <input type="text" id="cedula" placeholder="000-0000000-0" required maxlength="13">
+      <small id="cedula-error" style="color:red;display:none;font-size:0.8rem;margin-top:0.25rem;"></small>
+      <small id="cedula-valid" style="color:green;display:none;font-size:0.8rem;margin-top:0.25rem;">✓ Cédula válida</small>
     </div>
     <div style="display:flex;flex-direction:column;">
       <label for="identificador">Matricula *</label>
@@ -71,9 +73,11 @@
   </table>
 
   </main>
+  <script src="../js/login.js"></script>
   <script src="../js/commonApi.js"></script>
   <script src="../js/navbar.js"></script>
   <script src="../js/navigation.js"></script>
+  <script src="../js/validacionCedula.js"></script>
   <script src="../js/appPacientes.js"></script>
 </body>
 </html>

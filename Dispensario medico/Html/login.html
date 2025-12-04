@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Dispensario Médico</title>
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/estilosLogin.css" />
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <div class="login-header">
+        <span class="login-logo">🏥</span>
+        <h1>Dispensario Médico</h1>
+      </div>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="username">Usuario:</label>
+          <input 
+            type="text" 
+            id="username" 
+            name="username" 
+            placeholder="Ingrese su usuario"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Contraseña:</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            placeholder="Ingrese su contraseña"
+            required
+          />
+        </div>
+        <button type="submit" class="login-btn">Iniciar Sesión</button>
+      </form>
+      <div id="errorMessage" class="error-message"></div>
+    </div>
+  </div>
+  <script src="../js/login.js"></script>
+</body>
+</html>

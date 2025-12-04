@@ -38,9 +38,9 @@ app.use('/api/reports', reportRoutes);
 // Ruta simple para ver si está vivo
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
 
-// Página principal (dashboard)
+// Página principal (login)
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'Dispensario medico', 'Html', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'Dispensario medico', 'Html', 'login.html'));
 });
 
 // Si no encuentra la ruta

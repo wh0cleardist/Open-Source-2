@@ -27,6 +27,23 @@ function activateNavLogic() {
   if (toggle && nav) {
     toggle.addEventListener('click', () => nav.classList.toggle('open'));
   }
+  
+  // Botón de logout
+  const logoutBtn = document.getElementById('logoutBtn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      // La función logout está definida en login.js
+      if (typeof logout === 'function') {
+        logout();
+      } else {
+        // Fallback si login.js no está cargado
+        localStorage.removeItem('dispensario_sesion');
+        window.location.href = '/Html/login.html';
+      }
+    });
+  }
+  
   setActiveLink(window.location.pathname);
 }
 
