@@ -11,20 +11,25 @@ const VALID_CREDENTIALS = {
 const SESSION_KEY = 'dispensario_sesion';
 
 // Verificar si el usuario ya está autenticado (para la página de login)
-function verificarAutenticacion() {
+/*function verificarAutenticacion() {
   const sesion = localStorage.getItem(SESSION_KEY);
   if (sesion) {
     // Usuario ya autenticado, ir al dashboard
-    window.location.href = '/Html/index.html';
+    window.location.href = '../Html/index.html';
   }
 }
+  
+No se para que sirve esta funcion
+
+*/  
+
 
 // Verificar si el usuario está autenticado (para páginas protegidas)
 function requiereSesion() {
   const sesion = localStorage.getItem(SESSION_KEY);
   if (!sesion) {
     // No hay sesión, redirigir al login
-    window.location.href = '/Html/login.html';
+    window.location.href = '../Html/login.html';
     return false;
   }
   return true;
@@ -32,8 +37,9 @@ function requiereSesion() {
 
 // Hacer logout
 function logout() {
-  localStorage.removeItem(SESSION_KEY);
-  window.location.href = '/Html/login.html';
+  /*localStorage.removeItem(SESSION_KEY);
+  window.location.href = '../Html/login.html';*/
+  window.location.href = '../Html/login.html';
 }
 
 // Obtener datos del usuario autenticado
