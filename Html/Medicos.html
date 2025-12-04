@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Médicos - Dispensario Médico</title>
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/estilosE.css">
+</head>
+<body>
+
+  <div id="navbar-container"></div>
+  <main>
+  <h1>Médicos</h1>
+
+  <form id="form-medico" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:flex-end;background:#f5f5f5;padding:1rem;border-radius:6px;">
+    <div style="display:flex;flex-direction:column;">
+      <label for="nombre">Nombre *</label>
+      <input type="text" id="nombre" placeholder="Ej: Juan Pérez" required>
+    </div>
+    <div style="display:flex;flex-direction:column;">
+      <label for="identificador">Identificador *</label>
+      <input type="text" id="identificador" placeholder="Código" required>
+    </div>
+    <div style="display:flex;flex-direction:column;">
+      <label for="cedula">Cédula *</label>
+      <input type="text" id="cedula" placeholder="000-0000000-0" required>
+    </div>
+    <div style="display:flex;flex-direction:column;">
+      <label for="tanda_laboral">Tanda</label>
+      <select id="tanda_laboral">
+        <option value="Diurna">Diurna</option>
+        <option value="Tarde">Tarde</option>
+        <option value="Noche">Noche</option>
+        <option value="Rotativa">Rotativa</option>
+      </select>
+    </div>
+    <div style="display:flex;flex-direction:column;">
+      <label for="especialidad">Especialidad *</label>
+      <input type="text" id="especialidad" placeholder="Ej: Pediatría" required>
+    </div>
+    <div style="display:flex;flex-direction:column;">
+      <label for="estado">Estado</label> 
+      <select id="estado">
+        <option value="Disponible">Disponible</option>
+        <option value="Ausente">Ausente</option>
+        <option value="Descanso">Descanso</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:.5rem;">
+      <button type="submit" id="btn-doc-guardar">Guardar</button>
+      <button type="button" id="btn-doc-cancelar" class="hidden">Cancelar</button>
+    </div>
+  </form>
+
+  <table id="tabla">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Identificador</th>
+        <th>Cédula</th>
+        <th>Tanda laboral</th>
+        <th>Especialidad</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Medicamentos registrados aparecerán aquí -->
+    </tbody>
+  </table>
+
+  </main>
+  <script src="../js/auth.js"></script>
+  <script>protegerPagina();</script>
+  <script src="../js/commonApi.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/appMedicos.js"></script>
+</body>
+</html>

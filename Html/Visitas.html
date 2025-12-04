@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Visitas - Dispensario Médico</title>
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/estilosV.css">
+</head>
+<body>
+
+  <div id="navbar-container"></div>
+  <main>
+  <h1>Registro de Visitas</h1>
+
+  <form id="form-visita">
+    <label for="visitante">Nombre del Visitante:</label>
+    <input type="text" id="visitante" required>
+
+    <label for="doctor_id">Médico:</label>
+    <select id="doctor_id"></select>
+
+    <label for="patient_id">Paciente:</label>
+    <select id="patient_id"></select>
+
+    <label for="medicine_id">Medicamento:</label>
+    <select id="medicine_id"></select>
+
+    <label for="cantidad_despachada">Cantidad a Despachar:</label>
+    <input type="number" id="cantidad_despachada" min="1" value="1" required>
+
+    <label for="fecha">Fecha de visita:</label>
+    <input type="date" id="fecha" required>
+
+    <label for="hora">Hora de Visita:</label>
+    <input type="time" id="hora" required>
+
+    <label for="sintomas">Síntomas:</label>
+    <input type="text" id="sintomas" required>
+
+  <label for="recomendaciones">Recomendaciones:</label>
+  <input type="text" id="recomendaciones" placeholder="Indicaciones del médico">
+
+    <label for="estado">Estado:</label> 
+    <select id="estado">
+      <option value="Activo">Activo</option>
+      <option value="Despachado">Despachado</option>
+    </select>
+    <button type="submit">Guardar</button>
+  </form>
+
+  <h2>Reportes de Visitas</h2>
+  <form id="form-filtro">
+    <label for="f_doctor_id">Médico:</label>
+    <select id="f_doctor_id"><option value="">--</option></select>
+    <label for="f_patient_id">Paciente:</label>
+    <select id="f_patient_id"><option value="">--</option></select>
+    <label for="f_date">Fecha:</label>
+    <input type="date" id="f_date">
+    <label for="f_from">Desde:</label>
+    <input type="date" id="f_from">
+    <label for="f_to">Hasta:</label>
+    <input type="date" id="f_to">
+    <button type="submit">Filtrar</button>
+  </form>
+
+  <table id="tabla">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Visitante</th>
+        <th>Médico</th>
+        <th>Paciente</th>
+        <th>Medicamento</th>
+        <th>Cantidad</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Síntomas</th>
+  <th>Recomendaciones</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Medicamentos registrados aparecerán aquí -->
+    </tbody>
+  </table>
+
+  </main>
+  <script src="../js/auth.js"></script>
+  <script>protegerPagina();</script>
+  <script src="../js/commonApi.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/appVisitas.js"></script>
+</body>
+</html>

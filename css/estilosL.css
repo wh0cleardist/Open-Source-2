@@ -1,0 +1,64 @@
+/* OBSOLETO - Ya no se usa */
+/* Este archivo ha sido reemplazado por estilosLogin.css */
+/* Mantener para compatibilidad, pero login.html usa estilosLogin.css */
+
+.container {
+  background: #fff;
+  padding: 35px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 400px;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  text-align: center;
+}
+
+input {
+  width: 200px;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  margin-left: 22%;
+  margin-bottom: 3%;
+  border: 1px solid #ccc;
+}button{
+    width: 100px;
+    margin-left: 50%;
+    margin-top: 2%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+button {
+  background: #0078d7;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #005a9e;
+}
+
+.result {
+  margin-top: 15px;
+  font-weight: bold;
+  color: green;
+  text-align: center;
+}
+.error {
+  color: red;
+}
+
+.title{
+  text-align: center;
+  margin-left: 4%;
+}.brand{
+  text-align: center;
+  margin-bottom: 9%;
+  margin-right: 4%;
+}

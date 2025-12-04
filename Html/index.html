@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard - Dispensario Médico</title>
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/estilosM.css" />
+</head>
+<body>
+  <div id="navbar-container"></div>
+  <main id="app-main" class="dashboard">
+    <h1>Bienvenido al Sistema de Dispensario Médico</h1>
+    
+    <!-- Alertas de Stock -->
+    <section id="alertas-stock" class="alertas-section" style="display:none;">
+      <h2>⚠️ Alertas de Stock Bajo</h2>
+      <div id="lista-alertas" class="alertas-list"></div>
+    </section>
+    
+    <section class="cards-grid">
+      <a class="dash-card" href="/Html/Almacen.html" data-link>
+        <h2>Almacén</h2>
+        <p>Gestiona ubicaciones, tipos de fármacos y marcas.</p>
+      </a>
+      <a class="dash-card" href="/Html/Medicamentos.html" data-link>
+        <h2>Medicamentos</h2>
+        <p>Registra y administra medicamentos disponibles.</p>
+      </a>
+      <a class="dash-card" href="/Html/Medicos.html" data-link>
+        <h2>Médicos</h2>
+        <p>Control de personal médico y especialidades.</p>
+      </a>
+      <a class="dash-card" href="/Html/Pacientes.html" data-link>
+        <h2>Pacientes</h2>
+        <p>Registro y seguimiento de pacientes.</p>
+      </a>
+      <a class="dash-card" href="/Html/Visitas.html" data-link>
+        <h2>Visitas</h2>
+        <p>Registro de atenciones y generación de reportes.</p>
+      </a>
+
+    </section>
+  </main>
+  <script src="../js/auth.js"></script>
+  <script src="../js/commonApi.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>
