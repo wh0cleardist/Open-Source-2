@@ -247,6 +247,59 @@ form button:hover {
 }
 form button:active { transform: translateY(0); }
 
+/* Estilos para validación de cédula */
+.cedula-invalida {
+  border-color: #ef4444 !important;
+  border-width: 2px !important;
+  background-color: rgba(254, 242, 242, 0.6) !important;
+  color: #dc2626 !important;
+}
+
+.cedula-invalida:focus {
+  outline: none;
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+}
+
+.cedula-invalida::placeholder {
+  color: #f87171;
+}
+
+.cedula-valida {
+  border-color: #22c55e !important;
+  border-width: 2px !important;
+  background-color: rgba(240, 253, 244, 0.6) !important;
+  color: #166534 !important;
+}
+
+.cedula-valida:focus {
+  outline: none;
+  border-color: #22c55e !important;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15) !important;
+}
+
+.cedula-valida::placeholder {
+  color: #86efac;
+}
+
+#cedula-mensaje {
+  font-size: 0.8rem;
+  margin-top: 0.35rem;
+  font-weight: 600;
+  min-height: 1.2rem;
+  display: none;
+}
+
+#cedula-mensaje.error {
+  color: #dc2626;
+  display: block;
+}
+
+#cedula-mensaje.success {
+  color: #16a34a;
+  display: block;
+}
+
 /* Botones de acción */
 .actions button { 
   margin-right: 0.5rem;

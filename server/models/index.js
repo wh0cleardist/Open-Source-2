@@ -2,7 +2,8 @@ import { BaseModel } from './baseModel.js';
 
 export const DrugType = new BaseModel('drug_types', ['nombre','descripcion','estado']);
 export const Brand = new BaseModel('brands', ['nombre','estado']);
-export const Location = new BaseModel('locations', ['nombre','descripcion','estante','estado']);
+// Añadimos 'tramo' y 'celda' para exponer y permitir update/insert de esos campos
+export const Location = new BaseModel('locations', ['nombre','descripcion','estante','tramo','celda','estado']);
 export const Medicine = new BaseModel('medicines', ['nombre','descripcion','dosis','drug_type_id','brand_id','location_id','cantidad_disponible','stock_minimo','estado']);
 export const Doctor = new BaseModel('doctors', ['nombre','identificador','cedula','tanda_laboral','especialidad','estado']);
 export const Patient = new BaseModel('patients', ['nombre','cedula','identificador','tipo','estado','doctor_id']);

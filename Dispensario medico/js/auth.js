@@ -2,13 +2,13 @@
 const SESSION_KEY = 'dispensario_sesion';
 
 // Verificar si hay sesión activa
-export function tieneSesion() {
+function tieneSesion() {
   const sesion = localStorage.getItem(SESSION_KEY);
   return !!sesion;
 }
 
 // Obtener datos del usuario autenticado
-export function obtenerUsuario() {
+function obtenerUsuario() {
   const sesion = localStorage.getItem(SESSION_KEY);
   if (sesion) {
     try {
@@ -21,22 +21,24 @@ export function obtenerUsuario() {
 }
 
 // Proteger página: redirigir a login si no hay sesión
-export function protegerPagina() {
+function protegerPagina() {
   if (!tieneSesion()) {
-    window.location.href = '/Html/login.html';
+    window.location.href = '/';
     return false;
   }
   return true;
 }
 
 // Cerrar sesión
-export function cerrarSesion() {
+function cerrarSesion() {
   if (confirm('¿Está seguro que desea cerrar sesión?')) {
     localStorage.removeItem(SESSION_KEY);
-    window.location.href = '/Html/login.html';
+    window.location.href = '/';
   }
 }
 
-// Exponer funciones globalmente para uso en navbar
+// Exponer funciones globalmente para uso en HTML
 window.cerrarSesion = cerrarSesion;
 window.protegerPagina = protegerPagina;
+window.tieneSesion = tieneSesion;
+window.obtenerUsuario = obtenerUsuario;

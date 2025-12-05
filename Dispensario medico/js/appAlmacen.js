@@ -63,7 +63,7 @@ async function loadRows(){
     });
     const tdAcc = document.createElement('td');
     tdAcc.className='acciones';
-    tdAcc.innerHTML = `<button data-ed="${r.id}">Editar</button><button data-del="${r.id}">Del</button>`;
+    tdAcc.innerHTML = `<button data-edit="${r.id}">Editar</button><button data-del="${r.id}">Del</button>`;
     tr.appendChild(tdAcc);
     bodyRows.appendChild(tr);
   });
@@ -116,16 +116,16 @@ form.addEventListener('submit', async e => {
 btnCancelar.addEventListener('click', resetForm);
 
 bodyRows.addEventListener('click', async e => {
-  const id = e.target.dataset.ed || e.target.dataset.del;
+  const id = e.target.dataset.edit || e.target.dataset.del;
   if(!id) return;
   const cfg = catalogs[selectCat.value];
-  if (e.target.dataset.ed){
+  if (e.target.dataset.edit){
     const row = await api.request(`${cfg.endpoint}/${id}`);
     fNombre.value = row.nombre || '';
-  if (cfg.show.descripcion) fDesc.value = row.descripcion || '';
-  if (cfg.show.estante) fEstante.value = row.estante || '';
-  if (cfg.show.tramo) fTramo.value = row.tramo || '';
-  if (cfg.show.celda) fCelda.value = row.celda || '';
+    if (cfg.show.descripcion) fDesc.value = row.descripcion || '';
+    if (cfg.show.estante) fEstante.value = row.estante || '';
+    if (cfg.show.tramo) fTramo.value = row.tramo || '';
+    if (cfg.show.celda) fCelda.value = row.celda || '';
     fEstado.value = row.estado || 'Activo';
     editingId = id;
     btnCancelar.classList.remove('hidden');

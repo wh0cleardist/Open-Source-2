@@ -19,7 +19,8 @@
     </div>
     <div style="display:flex;flex-direction:column;">
       <label for="cedula">Cédula *</label>
-      <input type="text" id="cedula" placeholder="000-0000000-0" required>
+      <input type="text" id="cedula" placeholder="000-0000000-0" required autocomplete="off">
+      <small id="cedula-mensaje"></small>
     </div>
     <div style="display:flex;flex-direction:column;">
       <label for="identificador">Matricula *</label>
@@ -76,6 +77,13 @@
   <script src="../js/commonApi.js"></script>
   <script src="../js/navbar.js"></script>
   <script src="../js/navigation.js"></script>
+  <script src="../js/validacionCedula.js"></script>
+  <script>
+    // Configurar la validación de cédula cuando el documento esté listo
+    document.addEventListener('DOMContentLoaded', function() {
+      window.validacionCedula.configurarInputCedula('cedula');
+    });
+  </script>
   <script src="../js/appPacientes.js"></script>
 </body>
 </html>

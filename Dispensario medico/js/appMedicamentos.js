@@ -78,35 +78,45 @@ formMed.addEventListener('submit', async (e) => { // guardar o actualizar
     estado: document.getElementById('estado').value
   };
   if (!payload.nombre) return alert('Nombre requerido');
+  
   try {
     if (editingMedId) {
       await api.request(`/medicines/${editingMedId}`, { method: 'PUT', body: JSON.stringify(payload) });
+      alert('Medicamento actualizado correctamente');
     } else {
       await api.request('/medicines', { method: 'POST', body: JSON.stringify(payload) });
+      alert('Medicamento guardado correctamente');
     }
     formMed.reset();
     editingMedId = null;
     await cargarMedicamentos();
-  } catch (err) { alert(err.message); }
+  } catch (err) { 
+    console.error('Error:', err);
+    alert('Error: ' + err.message); 
+  }
 });
 
 tbodyMed.addEventListener('click', async (e) => { // editar o borrar
+  const id = e.target.dataset.edit || e.target.dataset.del;
+  if (!id) return;
+  
   if (e.target.dataset.edit) {
     const m = await api.request(`/medicines/${id}`);
     document.getElementById('nombre').value = m.nombre;
-  document.getElementById('descripcion').value = m.descripcion || '';
-  document.getElementById('dosis').value = m.dosis || '';
+    document.getElementById('descripcion').value = m.descripcion || '';
+    document.getElementById('dosis').value = m.dosis || '';
     document.getElementById('cantidad_disponible').value = m.cantidad_disponible || 0;
     document.getElementById('stock_minimo').value = m.stock_minimo || 5;
     document.getElementById('drug_type_id').value = m.drug_type_id || '';
     document.getElementById('brand_id').value = m.brand_id || '';
     document.getElementById('location_id').value = m.location_id || '';
     document.getElementById('estado').value = m.estado || 'Activo';
-    editingMedId = id;tById('location_id').value = m.location_id || '';
-    document.getElementById('estado').value = m.estado || 'Activo';
     editingMedId = id;
   } else if (e.target.dataset.del) {
-    if (confirm('¿Eliminar?')) { await api.request(`/medicines/${id}`, { method: 'DELETE' }); await cargarMedicamentos(); }
+    if (confirm('¿Eliminar?')) { 
+      await api.request(`/medicines/${id}`, { method: 'DELETE' }); 
+      await cargarMedicamentos(); 
+    }
   }
 });
 

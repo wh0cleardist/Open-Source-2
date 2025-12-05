@@ -24,7 +24,7 @@ function requiereSesion() {
   const sesion = localStorage.getItem(SESSION_KEY);
   if (!sesion) {
     // No hay sesión, redirigir al login
-    window.location.href = '/Html/login.html';
+    window.location.href = '/';
     return false;
   }
   return true;
@@ -33,7 +33,7 @@ function requiereSesion() {
 // Hacer logout
 function logout() {
   localStorage.removeItem(SESSION_KEY);
-  window.location.href = '/Html/login.html';
+  window.location.href = '/';
 }
 
 // Obtener datos del usuario autenticado

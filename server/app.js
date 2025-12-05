@@ -15,13 +15,36 @@ import inventoryRoutes from './routes/inventory.routes.js';
 import { initSchema } from './db/schema.js';
 
 const app = express();
-app.use(cors());
-app.use(express.json());
+
+// Configuración de CORS más segura
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://tudominio.com'] // Cambiar en producción
+    : '*', // Permitir todo en desarrollo
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
+app.use(express.json({ limit: '10mb' })); // Límite de tamaño de payload
 
 // Sirve los archivos del frontend (carpeta Dispensario medico)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Rutas específicas ANTES de express.static
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'Dispensario medico', 'Html', 'login.html'));
+});
+
+app.get('/login.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'Dispensario medico', 'Html', 'login.html'));
+});
+
+// Servir archivos estáticos
 app.use(express.static(path.join(__dirname, '..', 'Dispensario medico')));
+
+// Ruta simple para ver si está vivo
+app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
 
 // Crea tablas si no existen
 initSchema();
@@ -37,12 +60,13 @@ app.use('/api/visits', visitRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/inventory', inventoryRoutes);
 
-// Ruta simple para ver si está vivo
-app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
-
-// Página principal (login)
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'Dispensario medico', 'Html', 'login.html'));
+// Middleware de manejo de errores global
+app.use((err, req, res, next) => {
+  console.error('Error no capturado:', err);
+  res.status(500).json({ 
+    error: 'Error interno del servidor',
+    message: process.env.NODE_ENV === 'development' ? err.message : undefined
+  });
 });
 
 // Si no encuentra la ruta
@@ -55,9 +79,6 @@ app.listen(PORT, () => {
   const urlBase = `http://localhost:${PORT}`;
   const dashboard = `${urlBase}/Html/index.html`;
   console.log('==========================================');
-  console.log(`Servidor listo en: ${urlBase}`);
-  console.log(`Dashboard:       ${dashboard}`);
-  console.log(`API Health:      ${urlBase}/api/health`);
-  console.log('Ctrl + Click en cualquiera de las URLs para abrir.');
+  console.log(`Servidor desplegado en: ${urlBase}`);
   console.log('==========================================');
 });
